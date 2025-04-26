@@ -7,6 +7,7 @@ app = FastAPI()
 
 EQUITY_IMAGE_DIR = "images/equity/png"
 INDICES_IMAGE_DIR = "images/indices/png"
+SECTOR_IMAGE_DIR = "images/sector/png"
 
 @app.get("/")
 async def root():
@@ -32,3 +33,14 @@ async def get_indices_image(image_name: str):
     return FileResponse(image_path, headers={
         "Cache-Control": "public, max-age=31536000, immutable"
     })
+
+@app.get("/images/sector/{image_name}")
+async def get_indices_image(image_name: str):
+    image_path = SECTOR_IMAGE_DIR + "/" + image_name
+    print(f"Image path: {image_path}")
+    if not os.path.exists(image_path):
+        raise HTTPException(status_code=404, detail="Image not found")
+    return FileResponse(image_path, headers={
+        "Cache-Control": "public, max-age=31536000, immutable"
+    })
+
