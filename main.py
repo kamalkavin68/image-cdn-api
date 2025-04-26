@@ -6,7 +6,7 @@ import os
 
 app = FastAPI()
 
-IMAGE_DIR = "uploaded_images"
+EQUITY_IMAGE_DIR = "images\equity\png"
 
 @app.get("/")
 async def root():
@@ -16,7 +16,8 @@ async def root():
 @app.get("/images/{image_name}")
 async def get_image(image_name: str):
     extension = os.path.splitext(image_name)[1]
-    image_path = os.path.join(IMAGE_DIR, "equity", "png", image_name)
+    image_path = os.path.join(EQUITY_IMAGE_DIR, image_name)
+    print(f"Image path: {image_path}")
     if not os.path.exists(image_path):
         raise HTTPException(status_code=404, detail="Image not found")
     return FileResponse(image_path, headers={
