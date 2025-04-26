@@ -6,7 +6,7 @@ import os
 app = FastAPI()
 
 EQUITY_IMAGE_DIR = "images/equity/png"
-INDICES_IMAGE_DIR = "images/equity/png"
+INDICES_IMAGE_DIR = "images/indices/png"
 
 @app.get("/")
 async def root():
